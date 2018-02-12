@@ -57,7 +57,7 @@ def weightedAverage(zeroIndices, nhood, my_data, i):
 
 data = np.random.randint(6, size=(50, 25))
 
-np.savetxt("before_filling.csv", data, delimiter=",")
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/before_filling.csv", data, delimiter=",")
 
 for i in range(50):
     for j in range(50):
@@ -67,4 +67,4 @@ neighborhood(sim)
 
 fillInValues(data, nhood)
 
-np.savetxt("filled_ratings.csv", data, delimiter=",")
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", data, delimiter=",")

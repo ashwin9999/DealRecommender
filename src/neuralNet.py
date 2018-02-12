@@ -6,7 +6,7 @@ import numpy
 
 numpy.random.seed(7)
 
-dataset = numpy.loadtxt("filled_ratings.csv", delimiter=",")
+dataset = numpy.loadtxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", delimiter=",")
 print(dataset.shape)
 
 scalerX = StandardScaler()
@@ -38,9 +38,9 @@ test_output = scalerX.inverse_transform(test_output)
 Y = scalerY.inverse_transform(Y)
 X = scalerX.inverse_transform(X)
 
-numpy.savetxt("nn_input.csv", X, delimiter=",")
-numpy.savetxt("nn_groundtruth.csv", Y, delimiter=",")
-numpy.savetxt("nn_output.csv", test_output, delimiter=",")
-numpy.savetxt("nn_output_normalized.csv", to_2, delimiter=",")
+numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_input.csv", X, delimiter=",")
+numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_groundtruth.csv", Y, delimiter=",")
+numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_output.csv", test_output, delimiter=",")
+numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_output_normalized.csv", to_2, delimiter=",")
 
 
