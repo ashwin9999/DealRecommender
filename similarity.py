@@ -53,7 +53,11 @@ def weightedAverage(zeroIndices, nhood, my_data, i):
             numerator += sim[nhood[k],i]*columnMean(my_data[:, zeroIndices])
     return numerator/denom
 
-data = load_csv('/Users/ashwinmishra/Desktop/COMAP-2018/Data/CSV/Texas/texas_full.csv')
+#data = load_csv('/Users/ashwinmishra/Desktop/COMAP-2018/Data/CSV/Texas/texas_full.csv')
+
+data = np.random.randint(6, size=(50, 25))
+
+np.savetxt("before_filling.csv", data, delimiter=",")
 
 for i in range(50):
     for j in range(50):
@@ -63,4 +67,4 @@ neighborhood(sim)
 
 fillInValues(data, nhood)
 
-np.savetxt("tx_filled.csv", data, delimiter=",")
+np.savetxt("filled_ratings.csv", data, delimiter=",")
