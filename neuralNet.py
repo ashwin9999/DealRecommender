@@ -6,7 +6,7 @@ import numpy
 
 numpy.random.seed(7)
 
-dataset = numpy.loadtxt("tx_filled_kerasreshaped.csv", delimiter=",")
+dataset = numpy.loadtxt("filled_ratings.csv", delimiter=",")
 print(dataset.shape)
 
 scalerX = StandardScaler()
@@ -24,7 +24,7 @@ print('X.shape: {}'.format(X.shape))
 print('Y.shape: {}'.format(Y.shape))
 
 model = Sequential()
-model.add(Dense(800, input_dim=583, kernel_initializer='normal', activation='relu'))
+model.add(Dense(800, input_dim=25, kernel_initializer='normal', activation='relu'))
 model.add(Dense(1200, kernel_initializer='normal', activation='relu'))
 model.add(Dense(800, kernel_initializer='normal', activation='relu'))
 model.add(Dense(583, kernel_initializer='normal'))
@@ -38,9 +38,9 @@ test_output = scalerX.inverse_transform(test_output)
 Y = scalerY.inverse_transform(Y)
 X = scalerX.inverse_transform(X)
 
-numpy.savetxt("/src/workspace/Mask_RCNN/comap/nn_input.csv", X, delimiter=",")
-numpy.savetxt("/src/workspace/Mask_RCNN/comap/nn_groundtruth.csv", Y, delimiter=",")
-numpy.savetxt("/src/workspace/Mask_RCNN/comap/nn_output.csv", test_output, delimiter=",")
-numpy.savetxt("/src/workspace/Mask_RCNN/comap/nn_output_normalized.csv", to_2, delimiter=",")
+numpy.savetxt("nn_input.csv", X, delimiter=",")
+numpy.savetxt("nn_groundtruth.csv", Y, delimiter=",")
+numpy.savetxt("nn_output.csv", test_output, delimiter=",")
+numpy.savetxt("nn_output_normalized.csv", to_2, delimiter=",")
 
 
