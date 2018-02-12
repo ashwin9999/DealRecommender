@@ -20,6 +20,7 @@ def similarity(item1, item2, index1, index2):
     angle = math.degrees(angle)
     sim[index1, index2] = angle
 
+
 def neighborhood(similarity):
     for i in range(50):
         nhood[i, :] = np.argpartition(similarity[i, :], -5)[:5]
@@ -29,6 +30,9 @@ def fillInValues(my_data, nhood):
         dataZero = np.flatnonzero(my_data[i,:] == 0)
         for j in range(len(dataZero)):
             my_data[i,dataZero[j]] = weightedAverage(dataZero[j], nhood[i,:], my_data, i)
+
+
+
 
 def columnMean(inCol):
     sum = 0
@@ -55,7 +59,8 @@ def weightedAverage(zeroIndices, nhood, my_data, i):
 
 data = np.random.randint(6, size=(50, 25))
 
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/before_filling.csv", data, delimiter=",")
+np.around(data, decimals=2)
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/before_filling.csv", data, delimiter=",", fmt ='%f')
 
 for i in range(50):
     for j in range(50):
@@ -65,4 +70,14 @@ neighborhood(sim)
 
 fillInValues(data, nhood)
 
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", data, delimiter=",")
+print('similarity')
+for i in range(50):
+    print(sim[i,:])
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/similarity_matrix.csv", sim, delimiter=",", fmt ='%f')
+
+print('neighborhood')
+for i in range(50):
+    print(sim[i, nhood[i,:]])
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/neighborhood_matrix.csv", nhood, delimiter=",", fmt ='%f')
+
+np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", data, delimiter=",", fmt = '%f')
