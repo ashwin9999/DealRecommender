@@ -27,7 +27,7 @@ model = Sequential()
 model.add(Dense(800, input_dim=25, kernel_initializer='normal', activation='relu'))
 model.add(Dense(1200, kernel_initializer='normal', activation='relu'))
 model.add(Dense(800, kernel_initializer='normal', activation='relu'))
-model.add(Dense(583, kernel_initializer='normal'))
+model.add(Dense(25, kernel_initializer='normal'))
 
 model.compile(loss='mean_absolute_error', optimizer='adam')#, metrics=['accuracy'])
 model.fit(X, Y, epochs=10000, batch_size=25)

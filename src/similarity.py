@@ -31,9 +31,6 @@ def fillInValues(my_data, nhood):
         for j in range(len(dataZero)):
             my_data[i,dataZero[j]] = weightedAverage(dataZero[j], nhood[i,:], my_data, i)
 
-
-
-
 def columnMean(inCol):
     sum = 0
     avg = 0
@@ -59,6 +56,10 @@ def weightedAverage(zeroIndices, nhood, my_data, i):
 
 data = np.random.randint(6, size=(50, 25))
 
+print("data original ground truth")
+for i in range(len(data)):
+    print(data[i,:])
+
 np.around(data, decimals=2)
 np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/before_filling.csv", data, delimiter=",", fmt ='%f')
 
@@ -77,7 +78,7 @@ np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/similarity_matrix.c
 
 print('neighborhood')
 for i in range(50):
-    print(sim[i, nhood[i,:]])
+    print(nhood[i,:])
 np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/neighborhood_matrix.csv", nhood, delimiter=",", fmt ='%f')
 
 np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", data, delimiter=",", fmt = '%f')
