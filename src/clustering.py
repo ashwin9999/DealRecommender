@@ -1,15 +1,14 @@
 import numpy as np
 from numpy import genfromtxt
 import matplotlib.pyplot as plt
+import math
 import matplotlib.animation as animation
-
 
 def load_dataset(name):
 
     #loads data from csv file
     my_data = genfromtxt(name, delimiter=',')
     return my_data
-
 
 def euclidian(a, b):
 
@@ -20,18 +19,18 @@ def euclidian(a, b):
 def plot(dataset, history_centroids, belongs_to):
 
     #colors for each centroid cluster
-    colors = ['r', 'g']
+    colors = ['b', 'g']
 
     #split graph by its axis and actual plot
     fig, ax = plt.subplots()
-
     #for each point in our dataset
     for index in range(dataset.shape[0]):
         #get all the points assigned to a cluster
         instances_close = [i for i in range(len(belongs_to)) if belongs_to[i] == index]
         #assign each datapoint in that cluster a color and plot it
         for instance_index in instances_close:
-            ax.plot(dataset[instance_index][0], dataset[instance_index][1], (colors[index] + 'o'))
+                ax.plot(dataset[instance_index][0], dataset[instance_index][1], (colors[index] + 'o'))
+                plt.savefig('fig.png')
 
     #logging the history of centroids calculated via training
     history_points = []
@@ -55,19 +54,33 @@ def kmeans(k, epsilon=0, distance='euclidian'):
     if distance == 'euclidian':
         dist_method = euclidian
     #set the dataset
-    dataset = load_dataset('test.csv')
+    dataset = load_dataset('/Users/ashwinmishra/Desktop/DealRecommender/data/test.csv')
     #number of rows(num_instances), number of columns(num_features)
     num_instances, num_features = dataset.shape
     #set a random number of clusters(between 0 and n0. of rows-1) of size k [k centroids]
     prototypes = dataset[np.random.randint(0, num_instances - 1, size=k)]
+
+    #testing prototypes
+
+    for i in range(2):
+        print(prototypes[i])
+
+    print('separating')
+
     #set these to list of past centroids (to visualize progress over time)
     history_centroids.append(prototypes)
+
+    for i in range(len(history_centroids)):
+        print(history_centroids[i])
+
     #to keep track of centroids at every iteration
     prototypes_old = np.zeros(prototypes.shape)
+
     #stores clusters
     belongs_to = np.zeros((num_instances, 1))
     #finds euclidean distance
     norm = dist_method(prototypes, prototypes_old)
+
     iteration = 0
     while norm > epsilon:
         iteration += 1
@@ -111,7 +124,7 @@ def kmeans(k, epsilon=0, distance='euclidian'):
 
 
 def execute():
-    dataset = load_dataset('test.csv')
+    dataset = load_dataset('/Users/ashwinmishra/Desktop/DealRecommender/data/test.csv')
     centroids, history_centroids, belongs_to = kmeans(2)
     plot(dataset, history_centroids, belongs_to)
 
