@@ -54,31 +54,36 @@ def weightedAverage(zeroIndices, nhood, my_data, i):
             numerator += sim[nhood[k],i]*columnMean(my_data[:, zeroIndices])
     return numerator/denom
 
-data = np.random.randint(6, size=(50, 25))
+def main():
+    data = np.random.randint(6, size=(50, 25))
 
-print("data original ground truth")
-for i in range(len(data)):
-    print(data[i,:])
+    print("data original ground truth")
+    for i in range(len(data)):
+        print(data[i,:])
 
-np.around(data, decimals=2)
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/before_filling.csv", data, delimiter=",", fmt ='%f')
+    np.around(data, decimals=2)
+    np.savetxt("../data/before_filling.csv", data, delimiter=",", fmt ='%f')
 
-for i in range(50):
-    for j in range(50):
-        similarity(data[i, :], data[j, :], i, j)
+    for i in range(50):
+        for j in range(50):
+            similarity(data[i, :], data[j, :], i, j)
 
-neighborhood(sim)
+    neighborhood(sim)
 
-fillInValues(data, nhood)
+    fillInValues(data, nhood)
 
-print('similarity')
-for i in range(50):
-    print(sim[i,:])
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/similarity_matrix.csv", sim, delimiter=",", fmt ='%f')
+    print('similarity')
+    for i in range(50):
+        print(sim[i,:])
+    np.savetxt("../data/similarity_matrix.csv", sim, delimiter=",", fmt ='%f')
 
-print('neighborhood')
-for i in range(50):
-    print(nhood[i,:])
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/neighborhood_matrix.csv", nhood, delimiter=",", fmt ='%f')
+    print('neighborhood')
+    for i in range(50):
+        print(nhood[i,:])
+    np.savetxt("../data/neighborhood_matrix.csv", nhood, delimiter=",", fmt ='%f')
 
-np.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", data, delimiter=",", fmt = '%f')
+    np.savetxt("../data/filled_ratings.csv", data, delimiter=",", fmt = '%f')
+
+
+if __name__ == "__main__":
+    main()

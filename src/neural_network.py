@@ -6,7 +6,7 @@ import numpy
 
 numpy.random.seed(7)
 
-dataset = numpy.loadtxt("/Users/ashwinmishra/Desktop/DealRecommender/data/filled_ratings.csv", delimiter=",")
+dataset = numpy.loadtxt("../data/filled_ratings.csv", delimiter=",")
 print(dataset.shape)
 
 scalerX = StandardScaler()
@@ -17,6 +17,7 @@ Y = dataset[:,int(dataset.shape[1]/2):]
 
 scalerX.fit(X)
 scalerY.fit(Y)
+
 X = scalerX.transform(X)
 Y = scalerY.transform(Y)
 
@@ -29,7 +30,7 @@ model.add(Dense(1200, kernel_initializer='normal', activation='relu'))
 model.add(Dense(800, kernel_initializer='normal', activation='relu'))
 model.add(Dense(25, kernel_initializer='normal'))
 
-model.compile(loss='mean_absolute_error', optimizer='adam')#, metrics=['accuracy'])
+model.compile(loss='mean_absolute_error', optimizer='adam')
 model.fit(X, Y, epochs=10000, batch_size=25)
 test_output = model.predict(X)
 
@@ -38,9 +39,7 @@ test_output = scalerX.inverse_transform(test_output)
 Y = scalerY.inverse_transform(Y)
 X = scalerX.inverse_transform(X)
 
-numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_input.csv", X, delimiter=",")
-numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_groundtruth.csv", Y, delimiter=",")
-numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_output.csv", test_output, delimiter=",")
-numpy.savetxt("/Users/ashwinmishra/Desktop/DealRecommender/data/nn_output_normalized.csv", to_2, delimiter=",")
-
-
+numpy.savetxt("../data/nn_input.csv", X, delimiter=",")
+numpy.savetxt("../data/nn_groundtruth.csv", Y, delimiter=",")
+numpy.savetxt("../data/nn_output.csv", test_output, delimiter=",")
+numpy.savetxt("../data/nn_output_normalized.csv", to_2, delimiter=",")

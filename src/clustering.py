@@ -5,19 +5,16 @@ import math
 import matplotlib.animation as animation
 
 def load_dataset(name):
-
     #loads data from csv file
     my_data = genfromtxt(name, delimiter=',')
     return my_data
 
 def euclidian(a, b):
-
     #returns the euclidean distance between two points
     return np.linalg.norm(a-b)
 
 
 def plot(dataset, history_centroids, belongs_to):
-
     #colors for each centroid cluster
     colors = ['b', 'g']
 
@@ -124,11 +121,8 @@ def kmeans(k, epsilon=0, distance='euclidian'):
 
 
 def execute():
-    dataset = load_dataset('/Users/ashwinmishra/Desktop/DealRecommender/data/test.csv')
+    dataset = load_dataset('../data/test.csv')
     centroids, history_centroids, belongs_to = kmeans(2)
     plot(dataset, history_centroids, belongs_to)
 
-
 execute()
-
-
